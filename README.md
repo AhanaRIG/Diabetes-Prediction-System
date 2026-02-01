@@ -46,7 +46,9 @@ The Diabetes Prediction System is a machine learning–based decision support ap
 - Predictions should be validated by qualified healthcare professionals
 
 ## Future Enhancements
-- Integration of a secure web interface for healthcare staff
-- Deployment as a decision support tool using a web framework
-- Improved accuracy through feature engineering and larger datasets
-- Enhanced data privacy and access control mechanisms
+- Improve model performance through advanced feature engineering techniques
+- Experiment with additional machine learning algorithms and ensemble methods
+- Expand the dataset to improve generalization and robustness
+- Incorporate explainability techniques to better interpret model predictions
+- Conduct deeper statistical analysis to validate model behavior
+
