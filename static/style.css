@@ -1,0 +1,336 @@
+:root {
+    --primary: #1a73e8;
+    --primary-light: #e8f0fe;
+    --secondary: #34a853;
+    --dark: #202124;
+    --light-gray: #f8f9fa;
+    --danger: #ea4335;
+    --warning: #fbbc04;
+    --success: #34a853;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--light-gray);
+    color: var(--dark);
+    line-height: 1.6;
+}
+
+header {
+    background: linear-gradient(135deg, var(--primary), #0d47a1);
+    color: white;
+    text-align: center;
+    padding: 2rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* height:100px; */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1 {
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+}
+
+.tagline {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+main {
+    padding: 3rem 0;
+}
+
+.main-container {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.info-panel {
+    flex: 1;
+    min-width: 300px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+}
+
+.form-container {
+    flex: 2;
+    min-width: 600px;
+}
+
+/* .form-panel {
+    width: 100%;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+} */
+
+h2 {
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-light);
+}
+
+h3 {
+    margin: 1.5rem 0 1rem;
+    color: var(--dark);
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+.info-block {
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+/* input[type="number"], input[type="text"] {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+} */
+
+input[type="number"]:focus, input[type="text"]:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+}
+
+.input-help {
+    display: block;
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 0.3rem;
+}
+
+button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #0d47a1;
+}
+
+.result-card {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.result-pending {
+    background-color: var(--light-gray);
+    border: 1px dashed #ddd;
+}
+
+.result-diabetic {
+    background-color: #fef2f2;
+    border: 1px solid #fee2e2;
+    color: var(--danger);
+}
+
+.result-not-diabetic {
+    background-color: #f0fdf4;
+    border: 1px solid #dcfce7;
+    color: var(--success);
+}
+
+.result-heading {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.info-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: var(--primary);
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 0.7rem;
+    line-height: 16px;
+    margin-left: 0.3rem;
+    cursor: help;
+    position: relative;
+}
+
+.info-tooltip {
+    position: absolute;
+    visibility: hidden;
+    width: 180px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -90px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-weight: normal;
+    font-size: 0.75rem;
+    line-height: 1.4;
+}
+
+.info-icon:hover .info-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* .form-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+} */
+
+/* .form-col {
+    flex: 1;
+} */
+
+/* .normal-range {
+    display: block;
+    font-size: 0.75rem;
+    color: #666;
+    margin-top: 0.2rem;
+} */
+
+footer {
+    background-color: var(--dark);
+    color: white;
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: 3rem;
+}
+
+.disclaimer {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+    }
+    
+    .form-container {
+        min-width: 100%;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+
+
+
+
+/* Update these CSS rules to make your form work with 4 inputs per row */
+.form-panel {
+    width: 100%; /* Changed from 300px to full width */
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.form-col {
+    flex: 1;
+    min-width: 180px; /* Ensure columns have minimum width */
+}
+
+/* Adjust input fields to fit better */
+input[type="number"], input[type="text"] {
+    width: 100%; /* Make inputs full width of their container */
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+/* Make normal range text smaller to save vertical space */
+.normal-range {
+    font-size: 0.7rem;
+    color: #666;
+    margin-top: 0.2rem;
+    display: block;
+}
+
+/* Adjust responsive behavior */
+@media (max-width: 992px) {
+    .form-col {
+        min-width: 45%; /* 2 columns on medium screens */
+    }
+}
+
+@media (max-width: 576px) {
+    .form-col {
+        min-width: 100%; /* Stack on mobile */
+    }
+}

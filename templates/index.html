@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Risk Assessment Tool</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>Diabetes Prediction System</h1>
+                <p class="tagline">Early detection can help prevent complications and improve management</p>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container">
+            <div class="main-container">
+                <div class="form-container">
+                    <div class="form-panel">
+                        <h2>Diabetes Risk Prediction</h2>
+                        <p>Fill in your health information below to get a diabetes risk assessment. All fields are required for an accurate prediction.</p>
+                        
+                        <!-- Form part only - to be placed in your form-panel div -->
+                        <form action="/" method="POST">
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="Pregnancies">Number of Pregnancies
+                                            <span class="info-icon">i
+                                                <span class="info-tooltip">For individuals who have never been pregnant, enter 0</span>
+                                            </span>
+                                        </label>
+                                        <input type="number" id="Pregnancies" name="Pregnancies" min="0" required value="{{ request.form['Pregnancies'] if request.form else '' }}">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="Glucose">Glucose Level (mg/dL)
+                                            <span class="info-icon">i
+                                                <span class="info-tooltip">Blood glucose level after fasting for at least 8 hours</span>
+                                            </span>
+                                        </label>
+                                        <input type="number" id="Glucose" name="Glucose" min="0" required step="0.01" value="{{ request.form['Glucose'] if request.form else '' }}">
+                                        <span class="normal-range">Normal range: 70-99 mg/dL</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="BloodPressure">Blood Pressure (mm Hg)
+                                            <span class="info-icon">i
+                                                <span class="info-tooltip">Diastolic blood pressure measurement</span>
+                                            </span>
+                                        </label>
+                                        <input type="number" id="BloodPressure" name="BloodPressure" min="0" required step="0.01" value="{{ request.form['BloodPressure'] if request.form else '' }}">
+                                        <span class="normal-range">Below 80 mm Hg</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="SkinThickness">Skin Thickness (mm)
+                                            <span class="info-icon">i
+                                                <span class="info-tooltip">Triceps skin fold thickness, a measure of fat content</span>
+                                            </span>
+                                        </label>
+                                        <input type="number" id="SkinThickness" name="SkinThickness" min="0" required step="0.01" value="{{ request.form['SkinThickness'] if request.form else '' }}"> 
+                                        <span class="normal-range">Average: 23-33 mm</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="Insulin">Insulin Level (μU/mL)
+                                            <span class="info-icon">i
+                                                <span class="info-tooltip">2-Hour serum insulin level</span>
+                                            </span>
+                                        </label>
+                                        <input type="number" id="Insulin" name="Insulin" min="0" required step="0.01" value="{{ request.form['Insulin'] if request.form else '' }}">
+                                        <span class="normal-range">Range: 16-166 μU/mL</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="BMI">BMI (kg/m²)
+                                            <span class="info-icon">i
+                                                <span class="info-tooltip">Body Mass Index: weight(kg) / [height(m)]²</span>
+                                            </span>
+                                        </label>
+                                        <input type="number" id="BMI" name="BMI" min="0" required step="0.01" value="{{ request.form['BMI'] if request.form else '' }}">
+                                        <span class="normal-range">Normal: 18.5-24.9</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="DiabetesPedigreeFunction">Diabetes Pedigree
+                                            <span class="info-icon">i
+                                                <span class="info-tooltip">A function which scores likelihood of diabetes based on family history</span>
+                                            </span>
+                                        </label>
+                                        <input type="number" id="DiabetesPedigreeFunction" name="DiabetesPedigreeFunction" min="0" step="0.001" required value="{{ request.form['DiabetesPedigreeFunction'] if request.form else '' }}">
+                                        <span class="normal-range">Range: 0.078-2.42</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-col">
+                                    <div class="form-group">
+                                        <label for="Age">Age (years)</label>
+                                        <input type="number" id="Age" name="Age" min="18" max="120" required value="{{ request.form['Age'] if request.form else '' }}">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button type="submit">Calculate Risk</button>
+                        </form>
+                        
+                        {% if prediction %}
+                        <div class="result-card {% if prediction == 'Diabetic' %}result-diabetic{% elif prediction == 'Not Diabetic' %}result-not-diabetic{% else %}result-pending{% endif %}">
+                            <h3 class="result-heading">Prediction Result</h3>
+                            <p>Based on the provided information, the assessment indicates:</p>
+                            <p><strong style="font-size: 1.2rem;">{{ prediction }}</strong></p>
+                            {% if prediction == 'Diabetic' %}
+                            <p style="margin-top: 1rem;">This result suggests an elevated risk for diabetes. Please consult with a healthcare professional for proper medical advice and diagnosis.</p>
+                            {% elif prediction == 'Not Diabetic' %}
+                            <p style="margin-top: 1rem;">This result suggests a lower risk for diabetes. However, maintaining a healthy lifestyle is still important for continued well-being.</p>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- <div class="info-panel">
+                    <div class="info-block">
+                        <h2>Risk Factors</h2>
+                        <p>Several factors can increase your risk of developing diabetes:</p>
+                        <ul>
+                            <li>Being overweight or obese</li>
+                            <li>Being 45 years or older</li>
+                            <li>Having a family history of diabetes</li>
+                            <li>Being physically inactive</li>
+                            <li>Having gestational diabetes or giving birth to a baby who weighed more than 9 pounds</li>
+                            <li>Having polycystic ovary syndrome</li>
+                            <li>Having high blood pressure or high cholesterol</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-block">
+                        <h2>About This Tool</h2>
+                        <p>This predictive tool uses machine learning to assess your risk of developing diabetes based on several health parameters. The model has been trained on clinical data to identify patterns associated with diabetes diagnosis.</p>
+                        <p><strong>Please note:</strong> This tool is intended for educational purposes only and should not replace professional medical advice. Always consult with your healthcare provider for proper diagnosis and treatment.</p>
+                    </div>
+                </div> -->
+
+
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p class="disclaimer">Disclaimer: This tool provides an assessment based on machine learning predictions and should not be considered a medical diagnosis. Always consult with healthcare professionals for medical advice.</p>
+        </div>
+    </footer>
+</body>
+</html>
